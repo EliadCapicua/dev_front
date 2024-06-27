@@ -1,6 +1,6 @@
-# Welcome to your Expo app 👋
+# Welcome to Devsu Frontend
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is an Expo project bootstrapped with the [Expo CLI](https://docs.expo.dev/workflow/expo-cli/).
 
 ## Get started
 
@@ -24,3 +24,11 @@ In the output, you'll find options to open the app in a
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+# Testing
+
+This project uses [Jest](https://jestjs.io/) for testing. You can run the tests with:
+
+```bash
+npm test
+```
