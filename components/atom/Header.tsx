@@ -1,6 +1,7 @@
 import { SafeAreaView, StyleSheet, Platform, View } from "react-native";
 import { ThemedText } from "../ThemedText";
 import { FontAwesome6 } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 interface HeaderProps {
   title: string;
@@ -12,13 +13,14 @@ export const Header = (props: HeaderProps) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.headerRow}>
         {props.onLeftPress && (
-          <FontAwesome6
-            name="arrow-left"
-            size={24}
-            color="#0777E0"
-            style={styles.leftIcon}
-            onPress={props.onLeftPress}
-          />
+          <TouchableOpacity onPress={props.onLeftPress}>
+            <FontAwesome6
+              name="arrow-left"
+              size={24}
+              color="#0777E0"
+              style={styles.leftIcon}
+            />
+          </TouchableOpacity>
         )}
         <View
           style={[

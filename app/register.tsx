@@ -5,7 +5,7 @@ import { useRegisterScreen } from "@/hooks/screens/useRegisterScreen";
 export default function RegisterScreen() {
   const screen = useRegisterScreen();
   return (
-    <Screen>
+    <Screen isScrollable>
       <RegisterScreenContent {...screen} />
     </Screen>
   );

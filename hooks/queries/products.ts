@@ -7,6 +7,6 @@ export const useGetProducts = () =>
     queryKey: ["products"],
     queryFn: async (): Promise<Products[]> => {
       const response = await fetcher.get(`${config.apiHost}/bp/products`);
-      return response.data;
+      return response.data.data;
     },
   });

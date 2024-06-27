@@ -1,13 +1,35 @@
-import { SafeAreaView, StyleSheet, Platform, View } from "react-native";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Platform,
+  View,
+  KeyboardAvoidingView,
+  ScrollView,
+} from "react-native";
 
 interface ScreenProps {
   children: React.ReactNode;
+  isScrollable?: boolean;
 }
 
 export const Screen = (props: ScreenProps) => {
+  const ContentContainer = props.isScrollable ? ScrollView : View;
   return (
     <View style={styles.container}>
-      <SafeAreaView style={styles.content}>{props.children}</SafeAreaView>
+      <SafeAreaView style={styles.content}>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+          <ContentContainer
+            contentContainerStyle={{
+              flexGrow: 1,
+            }}
+            keyboardShouldPersistTaps="handled"
+            style={{ flex: 1 }}
+            showsVerticalScrollIndicator={false}
+          >
+            {props.children}
+          </ContentContainer>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
     </View>
   );
 };

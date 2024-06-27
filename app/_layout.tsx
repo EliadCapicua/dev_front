@@ -14,6 +14,8 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@/context/queryClient";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Header } from "@/components/atom/Header";
+import { BottomSheetComponent } from "@/components/molecule/BottomSheet";
+import { BottomSheetProvider } from "@/context/bottom";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -36,36 +38,55 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider
-          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
-          <Stack
-            initialRouteName="home"
-            screenOptions={{
-              headerTransparent: true,
-              contentStyle: { backgroundColor: "#ffff" },
-              headerBackVisible: false,
-            }}
+      <BottomSheetProvider>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider
+            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
           >
-            <Stack.Screen
-              name="index"
-              options={{
-                header: (props) => <Header {...props} title="Banco" />,
+            <Stack
+              initialRouteName="home"
+              screenOptions={{
+                headerTransparent: true,
+                contentStyle: { backgroundColor: "#ffff" },
+                headerBackVisible: false,
               }}
-            />
-            <Stack.Screen
-              name="register"
-              options={{
-                header: (props) => (
-                  <Header {...props} title="Banco" onLeftPress={router.back} />
-                ),
-              }}
-            />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-        </ThemeProvider>
-      </QueryClientProvider>
+            >
+              <Stack.Screen
+                name="index"
+                options={{
+                  header: (props) => <Header {...props} title="Banco" />,
+                }}
+              />
+              <Stack.Screen
+                name="register"
+                options={{
+                  header: (props) => (
+                    <Header
+                      {...props}
+                      title="Banco"
+                      onLeftPress={router.back}
+                    />
+                  ),
+                }}
+              />
+              <Stack.Screen
+                name="product"
+                options={{
+                  header: (props) => (
+                    <Header
+                      {...props}
+                      title="Banco"
+                      onLeftPress={router.back}
+                    />
+                  ),
+                }}
+              />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+            <BottomSheetComponent />
+          </ThemeProvider>
+        </QueryClientProvider>
+      </BottomSheetProvider>
     </GestureHandlerRootView>
   );
 }

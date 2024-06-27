@@ -5,6 +5,7 @@ import { ProductItem } from "./ProductItem";
 export interface ProductsListProps {
   products: Products[] | undefined;
   isLoading: boolean;
+  onProductPress: (product: Products) => void;
 }
 
 export const ProductsList = (props: ProductsListProps) => {
@@ -16,8 +17,21 @@ export const ProductsList = (props: ProductsListProps) => {
         <View style={styles.container}>
           <FlatList
             data={props.products}
-            renderItem={({ item }) => <ProductItem product={item} />}
+            renderItem={({ item }) => (
+              <ProductItem
+                product={item}
+                isFirstItem={
+                  props.products && props.products.indexOf(item) === 0
+                }
+                isLastItem={
+                  props.products &&
+                  props.products.indexOf(item) === props.products.length - 1
+                }
+                onPress={() => props.onProductPress(item)}
+              />
+            )}
             keyExtractor={(item) => item.id}
+            contentContainerStyle={{ marginVertical: 20 }}
           />
         </View>
       )}
