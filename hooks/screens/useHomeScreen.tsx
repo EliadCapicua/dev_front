@@ -5,6 +5,8 @@ import { Products } from "@/types/products";
 
 export const useHomeScreen = () => {
   const [search, setSearch] = useState("");
+  const [products, setProducts] = useState<Products[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
 
   useFocusEffect(
     useCallback(() => {
@@ -20,7 +22,12 @@ export const useHomeScreen = () => {
     refetch();
   };
 
-  const { refetch, data: products, isLoading } = useGetProducts();
+  const { refetch, isLoading } = useGetProducts({
+    onSuccess: (result) => {
+      setProducts(result);
+      setFilteredProducts(result);
+    },
+  });
 
   const onAddProduct = () => {
     router.push({ pathname: "/register", params: { mode: "add" } });
@@ -33,18 +40,26 @@ export const useHomeScreen = () => {
     });
   };
 
+  const handlerSearch = (text: string) => {
+    setSearch(text);
+    if (products.length === 0) return;
+    setFilteredProducts(
+      products.filter((product) =>
+        product.name.toLowerCase().includes(text.toLowerCase())
+      )
+    );
+  };
+
   return {
     productsListProps: {
-      products,
+      products: filteredProducts,
       isLoading,
       onProductPress,
     },
     searchInputProps: {
       placeholder: "Search...",
       value: search,
-      onChangeText: (text: string) => {
-        setSearch(text);
-      },
+      onChangeText: handlerSearch,
     },
     onAddProduct,
   };
