@@ -71,6 +71,8 @@ export const RegisterScreenContent = (props: RegisterScreenContentProps) => {
                 onChange={form.handleChange("date_release")}
                 isValid={!form.errors["date_release"]}
                 error={form.errors["date_release"]}
+                minDate={new Date()}
+                maxDate={new Date(2042, 0, 1)}
               />
               <DatePicker
                 label="Fecha de revisión"
@@ -79,6 +81,8 @@ export const RegisterScreenContent = (props: RegisterScreenContentProps) => {
                 onChange={form.handleChange("date_revision")}
                 isValid={!form.errors["date_revision"]}
                 error={form.errors["date_revision"]}
+                minDate={new Date()}
+                maxDate={new Date(2042, 0, 1)}
               />
             </View>
 

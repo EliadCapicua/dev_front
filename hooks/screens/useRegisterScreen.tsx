@@ -46,13 +46,28 @@ export const useRegisterScreen = () => {
     useUpdateProduct();
 
   const onSubmit = async (values: FormSchema) => {
-    if (mode === "edit") {
-      await updateProduct(values);
+    if (isValidData(values)) {
+      if (mode === "edit") {
+        await updateProduct(values);
+        router.push("/");
+        return;
+      }
+      await createProduct(values);
       router.push("/");
-      return;
+    } else {
+      alert(
+        "Fecha de revisión debe ser exactamente 1 año después de la fecha de lanzamiento"
+      );
     }
-    await createProduct(values);
-    router.push("/");
+  };
+
+  const isValidData = (values: FormSchema) => {
+    // check that the date_revision its exactly 1 year after date_release
+    const dateRelease = new Date(values.date_release);
+    const dateRevision = new Date(values.date_revision);
+    const diffTime = Math.abs(dateRevision.getTime() - dateRelease.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays === 365;
   };
 
   return {
