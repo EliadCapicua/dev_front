@@ -1,4 +1,4 @@
-# Welcome to Devsu Frontend
+# Welcome
 
 This is an Expo project bootstrapped with the [Expo CLI](https://docs.expo.dev/workflow/expo-cli/).
 
