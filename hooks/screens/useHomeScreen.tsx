@@ -23,7 +23,7 @@ export const useHomeScreen = () => {
   const { refetch, data: products, isLoading } = useGetProducts();
 
   const onAddProduct = () => {
-    router.push("/register");
+    router.push({ pathname: "/register", params: { mode: "add" } });
   };
 
   const onProductPress = (product: Products) => {

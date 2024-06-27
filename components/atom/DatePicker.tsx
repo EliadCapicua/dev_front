@@ -36,7 +36,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 }) => {
   const [date, setDate] = useState(value ? new Date(value) : undefined);
   const [dateString, setDateString] = useState(
-    value ? new Date(value).toDateString() : ""
+    value ? formatDate(new Date(value).toDateString()) : ""
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
 

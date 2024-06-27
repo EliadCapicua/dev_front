@@ -19,6 +19,7 @@ interface RegisterScreenContentProps {
     initialValues: FormSchema;
     onSubmit: (values: FormSchema, actions: FormikHelpers<FormSchema>) => void;
     isLoading?: boolean;
+    mode: string;
   };
 }
 
@@ -37,6 +38,7 @@ export const RegisterScreenContent = (props: RegisterScreenContentProps) => {
                 onChangeText={form.handleChange("id")}
                 isValid={!form.errors["id"]}
                 error={form.errors["id"]}
+                disabled={props.formProps.mode === "edit"}
               />
               <TextComponent
                 label="Nombre"
@@ -54,14 +56,14 @@ export const RegisterScreenContent = (props: RegisterScreenContentProps) => {
                 isValid={!form.errors["description"]}
                 error={form.errors["description"]}
               />
-              <TextComponent
+              {/* <TextComponent
                 label="Logo"
                 placeholder="Logo"
                 value={form.initialValues["logo"]}
                 onChangeText={form.handleChange("logo")}
                 isValid={!form.errors["logo"]}
                 error={form.errors["logo"]}
-              />
+              /> */}
               <DatePicker
                 label="Fecha de lanzamiento"
                 placeholder="Fecha de lanzamiento"

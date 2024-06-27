@@ -10,7 +10,10 @@ export const useProductScreen = () => {
     useDeleteProduct();
 
   const onEdit = () => {
-    console.log("Edit");
+    router.push({
+      pathname: "/register",
+      params: { product, mode: "edit" },
+    });
   };
 
   const onDelete = () => {

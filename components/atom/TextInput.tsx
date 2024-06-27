@@ -10,6 +10,7 @@ export interface TextComponentProps {
   isValid?: boolean;
   error?: string;
   isOptional?: boolean;
+  disabled?: boolean;
 }
 
 export const TextComponent = (props: TextComponentProps) => {
@@ -33,10 +34,12 @@ export const TextComponent = (props: TextComponentProps) => {
         style={[
           styles.input,
           !props.isValid && !props.isOptional && { borderColor: "#FF0000" },
+          props.disabled && { backgroundColor: "#E0E0E0" },
         ]}
         onChangeText={handleOnChangeText}
         value={value}
         autoCapitalize="none"
+        editable={!props.disabled}
       />
       {!props.isValid && !props.isOptional && (
         <ThemedText style={styles.error}>

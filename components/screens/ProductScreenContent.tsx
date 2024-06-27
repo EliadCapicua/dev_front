@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { ThemedText } from "../ThemedText";
 import { Products } from "@/types/products";
 import { Button } from "../atom/Button";
@@ -25,10 +25,23 @@ export const ProductScreenContent = (props: ProductScreenContentProps) => {
             {props.product.description}
           </ThemedText>
         </View>
-        <View style={styles.row}>
-          <ThemedText type="defaultSemiBold">Logo: </ThemedText>
-          <ThemedText type="defaultSemiBold">{props.product.logo}</ThemedText>
-        </View>
+        {props.product.logo && (
+          <View
+            style={[
+              styles.row,
+              {
+                alignItems: "flex-start",
+              },
+            ]}
+          >
+            <ThemedText type="defaultSemiBold">Logo: </ThemedText>
+            <Image
+              style={{ width: 200, height: 200 }}
+              source={{ uri: props.product.logo }}
+              resizeMode="contain"
+            />
+          </View>
+        )}
         <View style={styles.row}>
           <ThemedText type="defaultSemiBold">Fecha de liberación: </ThemedText>
           <ThemedText type="defaultSemiBold">
